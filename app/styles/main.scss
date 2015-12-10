@@ -1,0 +1,35 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+
+// Base rules
+body {
+  padding-top: 70px; 
+}
+
+h1:first-of-type {
+  margin-top: 0;
+}
+
+[ng-drag] {
+  cursor: move;
+}
+
+// Layout
+
+
+// Modules
+.action-icon {
+  cursor: pointer;
+  font-size: 0.5em;
+}
+
+.drag-enter {
+  background-color: #eee;
+}
+
+.songs {
+  font-size: 2em;
+}

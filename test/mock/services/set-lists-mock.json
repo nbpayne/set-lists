@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "test-1",
+    "date": "2013-12-11T20:30:00", 
+    "venue": "The Newsagency"
+  },
+  {
+    "_id": "test-2",
+    "date": "2999-02-11T20:30:00", 
+    "venue": "Mars Hill Cafe"
+  }
+]
