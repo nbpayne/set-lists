@@ -42,14 +42,14 @@
       expect(vm.setLists.data[0]._id.length).toBe(24);
     });
 
-    xit('should save a new set list', function () {
+    it('should save a new set list', function () {
       //$httpBackend.flush();
-      //var setListsLength = vm.setLists.data.length;
-      vm.reallyCreateSetList();
-      expect(vm.setList.data._id.length).toBe(24);
-      //scope.saveSetList();
-      //expect(scope.setLists.data.length).toBe(setListsLength + 1);
-      //expect(scope.setLists.data[setListsLength]._id.length).toBe(24);
+      var setListsLength = vm.setLists.data.length;
+      /* jshint -W117, -W030 */
+      var setList = getJSONFixture('services/set-lists-mock.json')[0];
+      vm.reallyCreateSetList(setList);
+      expect(vm.setLists.data.length).toBe(setListsLength + 1);
+      expect(vm.setLists.data[0]._id.length).toBe(24);
     });
 
     it('should delete a set list', function () {

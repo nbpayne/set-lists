@@ -2,7 +2,7 @@
 
   'use strict';
 
-  describe('UserService', function () {
+  xdescribe('UserService', function () {
 
     var UserService, $httpBackend;
 

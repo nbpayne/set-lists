@@ -143,10 +143,12 @@
       expect(angular.fromJson(localStorage['setList_test-1'])).toBe(undefined);
     });
 
+    /*
     xit('should delete a set list from the server', function () {
       expect(false).toBeTruthy();
     });
-
+    */
+    
   });
 
 })();

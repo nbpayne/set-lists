@@ -38,7 +38,7 @@
     UserService
   ) {
     var vm = this;
-    vm.setLists = { data: undefined };
+    vm.setLists = { data: [] };
     vm.createSetList = createSetList;
     vm.deleteSetList = deleteSetList;
     vm.reallyCreateSetList = reallyCreateSetList;
