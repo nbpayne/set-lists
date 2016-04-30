@@ -28,6 +28,7 @@
     );
 
     afterEach(function() {
+      localStorage.removeItem('authorization');
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
     });
@@ -35,10 +36,10 @@
     it('should log a user on', function () {
       $httpBackend.expectGET('http://localhost:8001/authorizations/4321');
 
-      expect(UserService.isLoggedIn).toBeFalsy();
-      expect(UserService.name).toBeUndefined();
-      expect(UserService.band).toBeUndefined();
-      expect(UserService.songListID).toBeUndefined();
+      expect(UserService.user().isLoggedIn).toBeFalsy();
+      expect(UserService.user().name).toBeUndefined();
+      expect(UserService.user().band).toBeUndefined();
+      expect(UserService.user().songListID).toBeUndefined();
       
       UserService.login(
         /* jshint -W117, -W030 */
@@ -51,10 +52,10 @@
 
       $httpBackend.flush();
 
-      expect(UserService.isLoggedIn).toBeTruthy();
-      expect(UserService.name).toBe('Test User');
-      expect(UserService.band).toBe('Test Band');
-      expect(UserService.songListID).toBe('test-1');
+      expect(UserService.user().isLoggedIn).toBeTruthy();
+      expect(UserService.user().name).toBe('Test User');
+      expect(UserService.user().band).toBe('Test Band');
+      expect(UserService.user().songListID).toBe('test-1');
     });
 
     it('should log a user off', function () {
@@ -75,10 +76,10 @@
       });
       $httpBackend.flush();
 
-      expect(UserService.isLoggedIn).toBeFalsy();
-      expect(UserService.name).toBeUndefined();
-      expect(UserService.band).toBeUndefined();
-      expect(UserService.songListID).toBeUndefined();
+      expect(UserService.user().isLoggedIn).toBeFalsy();
+      expect(UserService.user().name).toBeUndefined();
+      expect(UserService.user().band).toBeUndefined();
+      expect(UserService.user().songListID).toBeUndefined();
     });
     
   });

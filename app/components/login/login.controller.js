@@ -22,11 +22,11 @@
     $facebook
   ) {
     var vm = this;
-    $scope.authenticated = UserService.isLoggedIn;
+    vm.user = UserService.user();
     
     // Listen for authentication coming back from FB
     $scope.$on('authenticate', function (event, args) {
-      $scope.authenticated = args.authenticated;
+      vm.user = UserService.user();
     });
 
     // Force parse of xfbml

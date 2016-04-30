@@ -10,8 +10,8 @@
  */
 
   angular
-      .module('SetListApp')
-      .controller('SetList', SetList);
+    .module('SetListApp')
+    .controller('SetList', SetList);
 
   SetList.$inject = [
     '$location', 

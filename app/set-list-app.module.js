@@ -31,6 +31,7 @@
       url: '/login', 
       templateUrl: 'components/login/login.html', 
       controller: 'Login', 
+      controllerAs: 'vm', 
       secure: false
     })
     .state('set-lists', {
@@ -63,24 +64,26 @@
   function run ($rootScope, UserService, $state, $facebook) {
     // Enforce security
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      if(toState.secure && !UserService.isLoggedIn) {
+      if(toState.secure && !UserService.user().isLoggedIn) {
         $state.transitionTo('login');
         event.preventDefault();
       }
     });
 
+    $rootScope.$on('authenticate', function (event, response) {
+      if(!response.authenticated) {
+        $state.transitionTo('login');
+      }
+    })
+
     // Init authentication
     $rootScope.$on('facebook.auth.authResponseChange', function(event, response) {
       if (response.status === 'connected') {
         console.log(response);
-        UserService.login(response.authResponse, function() {
-          $rootScope.$broadcast('authenticate', { 'authenticated': true });
-        });
+        UserService.login(response.authResponse);
       } else {
         console.log(response.status);
-        UserService.logout(function () {
-          $rootScope.$broadcast('authenticate', { 'authenticated': false });
-        });
+        UserService.logout();
       }
     });
   }
