@@ -125,8 +125,9 @@
       tmpSetList.venue = vm.setList.data.venue;
 
       var modalInstance = $uibModal.open({
-        templateUrl: 'scripts/set-list-modal/set-list-modal.html', 
-        controller: 'SetListModal as vm', 
+        templateUrl: 'components/set-list-modal/set-list-modal.html', 
+        controller: 'SetListModal', 
+        controllerAs: 'vm', 
         resolve: {
           setList: function () {
             return tmpSetList;
@@ -140,7 +141,7 @@
         vm.setList.data.venue = tmpSetList.venue;
         SetListService.saveSetList(vm.setList);
       }, function (reason) {
-        //$log.info(reason);
+        console.log(reason);
       });
     }
 

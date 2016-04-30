@@ -63,7 +63,7 @@
     function createSetList () {
 
       var modalInstance = $uibModal.open({
-        templateUrl: 'scripts/set-list-modal/set-list-modal.html', 
+        templateUrl: 'components/set-list-modal/set-list-modal.html', 
         controller: 'SetListModal as vm', 
         resolve: {
           setList: function () {

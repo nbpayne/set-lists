@@ -51,6 +51,7 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
+          'app/index.html', 
           'app/{,*/}{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
           'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -426,7 +427,7 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
-        singleRun: false
+        singleRun: true
       }
     }
   });
