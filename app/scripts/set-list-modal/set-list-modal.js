@@ -14,12 +14,12 @@
       .controller('SetListModal', SetListModal);
 
   SetListModal.$inject = [
-    '$modalInstance', 
+    '$uibModalInstance', 
     '$moment', 
     'setList'
   ];
 
-  function SetListModal ($modalInstance, $moment, setList) {
+  function SetListModal ($uibModalInstance, $moment, setList) {
     var vm = this;
     vm.venue = setList.venue;
     if (setList.date) {
@@ -31,11 +31,11 @@
     function ok () {
       setList.venue = vm.venue;
       setList.date = $moment(vm.date).format();
-      $modalInstance.close(setList);
+      $uibModalInstance.close(setList);
     }
 
     function cancel () {
-      $modalInstance.dismiss();
+      $uibModalInstance.dismiss();
     }
 
   }

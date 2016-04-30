@@ -15,7 +15,7 @@
 
   SetLists.$inject = [
     '$log', 
-    '$modal',
+    '$uibModal',
     '$scope', 
     '$state',  
     'futureFilter',
@@ -27,7 +27,7 @@
 
   function SetLists (
     $log, 
-    $modal,
+    $uibModal,
     $scope, 
     $state, 
     futureFilter, 
@@ -62,7 +62,7 @@
     // Create a new set list
     function createSetList () {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'scripts/set-list-modal/set-list-modal.html', 
         controller: 'SetListModal as vm', 
         resolve: {

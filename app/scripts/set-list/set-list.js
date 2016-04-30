@@ -16,7 +16,7 @@
   SetList.$inject = [
     '$location', 
     // '$log', 
-    '$modal', 
+    '$uibModal', 
     '$scope', 
     '$stateParams', 
     'filterFilter', 
@@ -30,7 +30,7 @@
   function SetList (
     $location, 
     // $log, 
-    $modal, 
+    $uibModal, 
     $scope, 
     $stateParams, 
     filterFilter, 
@@ -124,7 +124,7 @@
       tmpSetList.date = vm.setList.data.date;
       tmpSetList.venue = vm.setList.data.venue;
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'scripts/set-list-modal/set-list-modal.html', 
         controller: 'SetListModal as vm', 
         resolve: {
