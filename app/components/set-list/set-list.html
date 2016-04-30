@@ -11,10 +11,10 @@
     </h1>
     <ol id="setListSongs" class="songs">
       <li ng-repeat="song in vm.setList.data.songs track by $index" ng-drop="true" ng-drop-success="vm.onDropComplete($index,  $data)">
+        <span class="pull-right">
+          <span class="glyphicon glyphicon-remove action-icon" ng-click="vm.removeSong($index)"></span>
+        </span>
         <div ng-drag="true" ng-drag-data="song">
-          <span class="pull-right">
-            <span class="glyphicon glyphicon-remove action-icon" ng-click="vm.removeSong($index)"></span>
-          </span>
           {{ song.name }}
         </div>
       </li>
