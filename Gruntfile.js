@@ -316,9 +316,11 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            'components/config/*.js', 
             'components/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*', 
+            '.nojekyll'
           ]
         }, {
           expand: true,
