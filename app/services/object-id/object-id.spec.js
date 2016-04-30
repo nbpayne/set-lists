@@ -2,7 +2,7 @@
 
   'use strict';
 
-  fdescribe('Service: ObjectIdService', function () {
+  describe('Service: ObjectIdService', function () {
 
     // load the service's module
     beforeEach(module('SetListApp'));

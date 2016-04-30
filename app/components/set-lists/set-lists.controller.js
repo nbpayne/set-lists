@@ -101,7 +101,7 @@
       SetListService.saveSetLists(vm.setLists);
 
       // Add songs to set list
-      newSetList.data.songListID = UserService.songListID;
+      newSetList.data.songListID = UserService.user().songListID;
       newSetList.data.songs = [];
 
       // Save set list to local storage

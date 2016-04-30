@@ -28,7 +28,7 @@
         $stateParams.setListID = 'test-1';
         scope = $rootScope.$new();
         $controller = _$controller_;
-      })
+      });
 
        vm = $controller('SetList as vm', {
         $scope: scope
@@ -48,7 +48,7 @@
       $httpBackend.flush();
       expect(vm.setList.data.date).toBe('2013-12-11T20:30:00');
       expect(vm.setList.data.venue).toBe('The Newsagency');
-      expect(vm.setList.data.songs.length).toBe(5)
+      expect(vm.setList.data.songs.length).toBe(5);
     });
 
     // Add song
@@ -60,7 +60,7 @@
     });
 
     // Add new song
-    fit('should add a song from the search box of the song list', function () {
+    it('should add a song from the search box of the song list', function () {
       $httpBackend.flush();
       expect(vm.setList.data.songs.length).toBe(5);
       vm.search = 'Queensland';

@@ -40,6 +40,7 @@
       vm.reallyCreateSetList({ venue: 'A', date: new Date() });
       expect(vm.setLists.data[0]._id).not.toBe(null);
       expect(vm.setLists.data[0]._id.length).toBe(24);
+      expect(vm.setLists.data[0].songListID).toBe('test-1');
     });
 
     it('should save a new set list', function () {
