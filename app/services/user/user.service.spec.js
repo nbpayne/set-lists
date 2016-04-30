@@ -15,11 +15,11 @@
         UserService = _UserService_;
         $httpBackend = _$httpBackend_;
 
-        jasmine.getJSONFixtures().fixturesPath = 'base/test/mock';
+        jasmine.getJSONFixtures().fixturesPath = 'base/app/services';
         $httpBackend.whenGET('http://localhost:8001/authorizations/4321')
         .respond(
           /* jshint -W117, -W030 */
-          getJSONFixture('services/authorization-mock.json')
+          getJSONFixture('authorization/authorization.mock.json')
         );
         $httpBackend.whenDELETE('http://localhost:8001/authorizations/4321')
         .respond();
@@ -43,7 +43,7 @@
       
       UserService.login(
         /* jshint -W117, -W030 */
-        getJSONFixture('services/auth-response-mock.json'), 
+        getJSONFixture('authorization/authorization-response.mock.json'), 
         function () {
           //console.log('Yata!');
           return;
@@ -62,7 +62,7 @@
       $httpBackend.expectGET('http://localhost:8001/authorizations/4321');
       UserService.login(
         /* jshint -W117, -W030 */
-        getJSONFixture('services/auth-response-mock.json'), 
+        getJSONFixture('authorization/authorization-response.mock.json'), 
         function () {
           //console.log('Yata!');
           return;

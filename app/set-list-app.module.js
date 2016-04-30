@@ -11,18 +11,18 @@
    */
    
   angular
-  .module('SetListApp', [
-    'angular-momentjs',
-    'facebook', 
-    'my.config', 
-    'ngDraggable',
-    'ngResource', 
-    'ui.bootstrap', 
-    'ui.bootstrap.datetimepicker',
-    'ui.router',
-  ])
-  .config(config)
-  .run(run);
+    .module('SetListApp', [
+      'angular-momentjs',
+      'facebook', 
+      'ngDraggable',
+      'ngResource', 
+      'SetListApp.config', 
+      'ui.bootstrap', 
+      'ui.bootstrap.datetimepicker',
+      'ui.router',
+    ])
+    .config(config)
+    .run(run);
 
   function config ($stateProvider, $urlRouterProvider, $facebookProvider, FB_APPID) {
     // Routing

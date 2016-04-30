@@ -28,7 +28,10 @@ module.exports = function (grunt) {
       javascript: {
         files: [
           'app/set-list-app.module.js', 
-          'app/{components,services}/{,*/}*{,.service}.js'
+          'app/components/**/*.controller.js', 
+          'app/services/**/*.mock.js', 
+          'app/services/**/*.resource.js', 
+          'app/services/**/*.service.js'
         ],
         tasks: ['newer:jshint:all', 'karma'],
         options: {
@@ -36,7 +39,10 @@ module.exports = function (grunt) {
         }
       },
       tests: {
-        files: ['app/{components,services}/{,*/}*.spec.js'],
+        files: [
+          'app/components/**/*.controller.spec.js', 
+          'app/services/**/*.service.spec.js'
+        ],
         tasks: ['newer:jshint:test', 'karma']
       }, 
       sass: {
@@ -46,6 +52,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      karmaConf: {
+        files: ['test/karma.conf.js'], 
+        tasks: ['karma']
+      }, 
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'

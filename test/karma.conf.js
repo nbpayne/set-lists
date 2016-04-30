@@ -39,13 +39,23 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js', 
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js', 
       'app/set-list-app.module.js', 
-      'app/components/**/*.js',
-      'app/services/**/*.*.js', 
-      'test/mock/**/*.js',
-      'app/components/**/*.spec.js', 
+      'app/components/config/config.js', 
+      'app/components/**/*.controller.js', 
+      'app/components/filters/*.filter.js', 
+      'app/services/**/*.resource.js', 
+      'app/services/**/*.service.js', 
+      'app/services/**/*.service.mock.js', 
+      'app/components/**/*.controller.spec.js',
+      'app/services/**/*.service.spec.js', 
 
       // fixtures
-      {pattern: 'test/mock/**/*.json', watched: true, served: true, included: false}
+      {
+        pattern: 'app/services/**/*.mock.json',
+        watched: true, 
+        served: true, 
+        included: false
+      }
+
     ],
 
     // list of files / patterns to exclude
