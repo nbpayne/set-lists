@@ -185,6 +185,7 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['app/index.html'],
+        exclude: ['bower_components/angular/angular.js'], 
         ignorePath:  /\.\.\//
       },
       test: {
