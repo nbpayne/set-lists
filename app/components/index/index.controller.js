@@ -15,14 +15,16 @@
 
   Index.$inject = [
     '$scope', 
-    'UserService'
+    'UserService',
+    'VERSION'
   ];
 
-  function Index($scope, UserService) {
+  function Index($scope, UserService, VERSION) {
     var vm = this;
     vm.location = undefined; // = $location.absUrl();
     vm.logout = logout;
     vm.user = UserService.user();
+    vm.version = VERSION;
 
     // Listen for changes to location
     $scope.$on('$locationChangeSuccess', locationChangeSuccess);

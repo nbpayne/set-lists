@@ -59,6 +59,7 @@
     "globals": {
         "angular": false,
         "$": false, 
-        "inject": false
+        "inject": false, 
+        "getJSONFixture": false
     }
 }
