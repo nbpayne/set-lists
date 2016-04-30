@@ -31,17 +31,18 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-momentjs/angular-momentjs.js',
+      'bower_components/ngFacebook/dev/src/unmin/ngFacebook.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jasmine/lib/jasmine-core/jasmine.js',
       'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
       // endbower
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js', 
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js', 
-      'app/scripts/set-list-app.js', 
-      'app/scripts/**/*.js',
+      'app/set-list-app.module.js', 
+      'app/components/**/*.js',
       'app/services/**/*.*.js', 
       'test/mock/**/*.js',
-      'app/scripts/**/*.spec.js', 
+      'app/components/**/*.spec.js', 
 
       // fixtures
       {pattern: 'test/mock/**/*.json', watched: true, served: true, included: false}
