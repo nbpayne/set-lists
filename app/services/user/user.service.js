@@ -23,11 +23,13 @@
     };
 
     function login (authResponse, callback) {
+      var svc = this;
+
       AuthorizationResource.get({ accessToken: authResponse.accessToken}, function (data) {
-        isLoggedIn = true;
-        name = data.firstName + ' ' + data.lastName;
-        band = data.band;
-        songListID = data.songListID;
+        svc.isLoggedIn = true;
+        svc.name = data.firstName + ' ' + data.lastName;
+        svc.band = data.band;
+        svc.songListID = data.songListID;
         $http.defaults.headers.common['auth-token'] = data.authToken;
         callback();
       }, function (response) {
@@ -36,13 +38,13 @@
     }
 
     function logout (callback) {
-      isLoggedIn = false; 
-      name = undefined; 
-      band = undefined;  
-      songListID = undefined;
+      this.isLoggedIn = false; 
+      this.name = undefined; 
+      this.band = undefined;  
+      this.songListID = undefined;
 
       AuthorizationResource.delete({ accessToken: '4321'}, function (data) {
-        console.log('Authorization deleted from server');
+        //console.log('Authorization deleted from server');
         delete $http.defaults.headers.common['auth-token'];
         callback();
       }, function (response) {

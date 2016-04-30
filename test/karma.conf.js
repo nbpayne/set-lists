@@ -39,8 +39,9 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js', 
       'app/scripts/set-list-app.js', 
       'app/scripts/**/*.js',
+      'app/services/**/*.*.js', 
       'test/mock/**/*.js',
-      'test/spec/**/*.js', 
+      'app/scripts/**/*.spec.js', 
 
       // fixtures
       {pattern: 'test/mock/**/*.json', watched: true, served: true, included: false}
