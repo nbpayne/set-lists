@@ -57,15 +57,15 @@
 
       localStorage.removeItem('authorization');
       
-      AuthorizationResource.delete({ accessToken: '4321'}, function (data) {
+      //AuthorizationResource.delete({ accessToken: authorization.authToken }, function (data) {
         //console.log('Authorization deleted from server');
         delete $http.defaults.headers.common['auth-token'];
         $rootScope.$broadcast('authenticate', { 'authenticated': false });
-      }, function (response) {
-        console.log(response);
-        delete $http.defaults.headers.common['auth-token'];
-        $rootScope.$broadcast('authenticate', { 'authenticated': false });
-      });
+      //}, function (response) {
+      //  console.log(response);
+      //  delete $http.defaults.headers.common['auth-token'];
+      //  $rootScope.$broadcast('authenticate', { 'authenticated': false });
+      //});
     }
 
   }

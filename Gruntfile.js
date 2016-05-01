@@ -100,6 +100,28 @@ module.exports = function (grunt) {
           }
         }
       },
+      subfolder: {
+        options: {
+          open: false,
+          middleware: function (connect) {
+            return [
+              connect().use(
+                '/app/bower_components',
+                connect.static('./bower_components')
+              ),
+              connect().use(
+                '/app/styles',
+                connect.static('./.tmp/styles')
+              ),
+              connect().use(
+                '/app/fonts',
+                connect.static('./bower_components/font-awesome/fonts')
+              ),
+              connect.static('./')
+            ];
+          }
+        }
+      },
       test: {
         options: {
           port: 9001,
