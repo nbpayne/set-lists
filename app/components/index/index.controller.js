@@ -23,19 +23,14 @@
     var vm = this;
     vm.location = undefined; // = $location.absUrl();
     vm.logout = logout;
-    vm.user = UserService.user();
+    //vm.user = UserService.user();
     vm.version = VERSION;
 
     // Listen for changes to location
     $scope.$on('$locationChangeSuccess', locationChangeSuccess);
 
-    // Listen for authentication
-    $scope.$on('authenticate', function (event, args) {
-      vm.user = UserService.user();
-    });
-
     function locationChangeSuccess (angularEvent, newUrl) {
-      vm.location = newUrl;
+      vm.location = newUrl.split('?')[0];
     }
 
     function logout () {

@@ -3,34 +3,33 @@
 
   angular
     .module('SetListApp')
-    .controller('Login', Login);
+    .controller('Authorize', Authorize);
 
-  Login.$inject = [ 
-    'UserService',  
-    '$window', 
+  Authorize.$inject = [
+    'UserService', 
     '$facebook', 
     'FB_APPID'
   ];
 
-	// Login controller
-  function Login (
+	// Authorize controller
+  function Authorize (
     UserService, 
-    $window, 
     $facebook, 
     FB_APPID
   ) {
     var vm = this;
-    vm.login = login;
+    
+    authorize();
 
-    function login () {
+    // Authorize the user
+    function authorize () {
       $facebook.getLoginStatus().then(
         function (response) {
           if (response.status === 'connected') {
             UserService.login(response.authResponse);
           }
           else {
-            $window.location.href = 'https://www.facebook.com/dialog/oauth?client_id=' + FB_APPID + 
-              '&redirect_uri=' + $window.location.origin + $window.location.pathname;
+            UserService.logout();
           }
         },
         function (response) {

@@ -91,6 +91,10 @@ module.exports = function (grunt) {
                 '/app/styles',
                 connect.static('./app/styles')
               ),
+              connect().use(
+                '/fonts',
+                connect.static('./bower_components/font-awesome/fonts')
+              ),
               connect.static('app')
             ];
           }
@@ -129,7 +133,11 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          'app/{components,services}/{,*/}*.js'
+          'app/set-list-app.module.js', 
+          'app/components/**/*.controller.js', 
+          'app/services/**/*.mock.js', 
+          'app/services/**/*.resource.js', 
+          'app/services/**/*.service.js'
         ]
       },
       test: {
@@ -185,7 +193,11 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['app/index.html'],
-        exclude: ['bower_components/angular/angular.js'], 
+        exclude: [
+          'bower_components/angular/angular.js', 
+          'bower_components/bootstrap-social/bootstrap-social.css', 
+          'bower_components/bootstrap/dist/js/bootstrap.js'
+        ], 
         ignorePath:  /\.\.\//
       },
       test: {
@@ -332,6 +344,11 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
+          dest: 'dist'
+        }, {
+          expand: true, 
+          cwd: 'bower_components/font-awesome', 
+          src: 'fonts/*', 
           dest: 'dist'
         }]
       },

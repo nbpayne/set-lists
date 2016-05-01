@@ -40,7 +40,6 @@
     }
 
     function login (authResponse) {
-
       AuthorizationResource.get({ accessToken: authResponse.accessToken}, function (data) {
         // Save to local storage
         localStorage['authorization'] = angular.toJson(data);

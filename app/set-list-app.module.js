@@ -19,9 +19,9 @@
       'SetListApp.config', 
       'ui.bootstrap', 
       'ui.bootstrap.datetimepicker',
-      'ui.router',
+      'ui.router'
     ])
-    .constant('VERSION', '0.12.1')
+    .constant('VERSION', '0.13.1')
     .config(config)
     .run(run);
 
@@ -32,6 +32,13 @@
       url: '/login', 
       templateUrl: 'components/login/login.html', 
       controller: 'Login', 
+      controllerAs: 'vm', 
+      secure: false
+    })
+    .state('authorize', {
+      url: '/authorize', 
+      templateUrl: 'components/authorize/authorize.html', 
+      controller: 'Authorize', 
       controllerAs: 'vm', 
       secure: false
     })
@@ -57,36 +64,38 @@
         status: true,
         cookies: false,
         xfbml: false, 
-        version: 'v2.5'
+        version: 'v2.6'
     });
 
   }
 
-  function run ($rootScope, UserService, $state, $facebook) {
+  function run ($rootScope, UserService, $state, $facebook, $window) {
     // Enforce security
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      if(toState.secure && !UserService.user().isLoggedIn) {
-        $state.transitionTo('login');
-        event.preventDefault();
+      // Get rid of any querystring (esp. after redirect from facebook login)
+      if ($window.location.search) {
+        if ($window.location.search.includes('?code=')) {
+          $window.location.href = $window.location.origin + $window.location.pathname + '#/authorize';
+        } else {
+          $window.location.href = $window.location.origin + $window.location.pathname + '#/set-lists'; 
+        }
+      } else {
+        // Secure pages
+        if(toState.secure && !UserService.user().isLoggedIn) {
+          $state.transitionTo('login');
+          event.preventDefault();
+        }
       }
     });
 
     $rootScope.$on('authenticate', function (event, response) {
       if(!response.authenticated) {
         $state.transitionTo('login');
-      }
-    })
-
-    // Init authentication
-    $rootScope.$on('facebook.auth.authResponseChange', function(event, response) {
-      if (response.status === 'connected') {
-        console.log(response);
-        UserService.login(response.authResponse);
       } else {
-        console.log(response.status);
-        UserService.logout();
+        $state.transitionTo('set-lists');
       }
     });
+
   }
 
 })();

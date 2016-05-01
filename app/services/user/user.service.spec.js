@@ -24,6 +24,7 @@
         $httpBackend.whenDELETE('http://localhost:8001/authorizations/4321')
         .respond();
         $httpBackend.whenGET('components/login/login.html').respond();
+        $httpBackend.whenGET('components/set-lists/set-lists.html').respond();
       })
     );
 
