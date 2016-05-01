@@ -42,6 +42,7 @@
   ) {
     var vm = this;
     vm.location = $location.absUrl();
+    vm.loading = true;
 
     vm.addNewSong = addNewSong;
     vm.addSong = addSong;
@@ -52,20 +53,24 @@
     vm.removeSong = removeSong;
     vm.saveSong = saveSong;
 
-    // Get set list from server
-    SetListService.getSetList($stateParams.setListID, initialize);
-    
-    // Start synchroniser
-    SynchronisationService.startSetListSynchroniser();
+    init();
 
-    // Initialize the data for the view
-    function initialize (setList) {
+    function init () {
+      // Get set list from server
+      SetListService.getSetList($stateParams.setListID, initialize);
+      
+      // Start synchroniser
+      SynchronisationService.startSetListSynchroniser();
+
       // Shutdown synchroniser
       $scope.$on('$destroy', function() {
         // Make sure that the interval is destroyed too
         SynchronisationService.stopSetListSynchroniser();
       });
+    }
 
+    // Initialize the data for the view
+    function initialize (setList) {
       // Get the song lis
       SongListService.getSongList(setList.data.songListID, function(songList) {
         // Add songlist to the view model
@@ -91,6 +96,9 @@
         function compareSongs (e) { 
           return e._id === setList.data.songs[i]._id;
         }
+
+        // Hide spinners
+        vm.loading = false;
 
       });
 

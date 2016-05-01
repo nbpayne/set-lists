@@ -20,9 +20,11 @@
     FB_APPID
   ) {
     var vm = this;
+    vm.loading = false;
     vm.login = login;
 
     function login () {
+      vm.loading = true;
       $facebook.getLoginStatus().then(
         function (response) {
           if (response.status === 'connected') {
@@ -35,6 +37,7 @@
         },
         function (response) {
           console.log(response);
+          vm.loading = false;
         }
       );
     }

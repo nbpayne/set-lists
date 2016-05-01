@@ -38,25 +38,31 @@
     UserService
   ) {
     var vm = this;
+    vm.loading = true;
     vm.setLists = { data: [] };
     vm.createSetList = createSetList;
     vm.deleteSetList = deleteSetList;
     vm.reallyCreateSetList = reallyCreateSetList;
 
-    // Shutdown synchroniser
-    $scope.$on('$destroy', function() {
-      // Make sure that the interval is destroyed too
-      SynchronisationService.stopSetListsSynchroniser();
-    });
-    
-    // Get the list of set lists
-    SetListService.getSetLists(initialize);
+    init();
 
-    // Start synchroniser
-    SynchronisationService.startSetListsSynchroniser();
+    function init () {
+      // Shutdown synchroniser
+      $scope.$on('$destroy', function() {
+        // Make sure that the interval is destroyed too
+        SynchronisationService.stopSetListsSynchroniser();
+      });
+      
+      // Get the list of set lists
+      SetListService.getSetLists(initialize);
+
+      // Start synchroniser
+      SynchronisationService.startSetListsSynchroniser(); 
+    }
 
     function initialize (setLists) {
       vm.setLists = setLists;
+      vm.loading = false;
     }
 
     // Create a new set list
