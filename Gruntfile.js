@@ -351,7 +351,6 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'components/config/*.js', 
             'components/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*', 
@@ -372,6 +371,12 @@ module.exports = function (grunt) {
           cwd: 'bower_components/font-awesome', 
           src: 'fonts/*', 
           dest: 'dist'
+        }, {
+          expand: true,
+          src: 'app/components/config/config.PRD.js', 
+          rename: function () { 
+            return 'dist/components/config/config.js'; 
+          }
         }]
       },
       styles: {
