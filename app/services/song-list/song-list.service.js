@@ -6,10 +6,14 @@
   .service('SongListService', SongListService);
 
   SongListService.$inject = [
+    '$rootScope', 
     'SongListResource'
   ];
 
-  function SongListService (SongListResource) {
+  function SongListService (
+    $rootScope, 
+    SongListResource
+  ) {
     return {
       getSongList: getSongList, 
       saveSongList: saveSongList, 
@@ -23,13 +27,17 @@
         callback(songList);
         saveSongList(songList, false);
       }, function (response) {
-        // If failure get from local storage
-        var songList = angular.fromJson(localStorage['songList_' + songListID]);
-        if (songList === undefined) { 
-          songList = {};
-          songList.data = [];
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          // If failure get from local storage
+          var songList = angular.fromJson(localStorage['songList_' + songListID]);
+          if (songList === undefined) { 
+            songList = {};
+            songList.data = [];
+          }
+          callback(songList);
         }
-        callback(songList);
       });
     }
 
@@ -46,8 +54,12 @@
       SongListResource.update({ songListID: songList.data._id }, songList.data, function (data) {
         saveSongList(songList, false);
         console.log(data);
-      }, function (data) {
-        console.log(data);
+      }, function (response) {
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          console.log(response);
+        }
       });
     }
 

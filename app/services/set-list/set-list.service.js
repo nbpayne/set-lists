@@ -6,10 +6,14 @@
   .service('SetListService', SetListService);
 
   SetListService.$inject = [
+    '$rootScope', 
     'SetListResource'
   ];
 
-  function SetListService (SetListResource) {
+  function SetListService (
+    $rootScope, 
+    SetListResource
+  ) {
     return {
       getSetLists: getSetLists, 
       saveSetLists: saveSetLists, 
@@ -27,13 +31,18 @@
         callback(setLists);
         saveSetLists(setLists, false);
       }, function (response) {
-        // If failure get from local storage
-        var setLists = angular.fromJson(localStorage['setLists']);
-        if (setLists === undefined) { 
-          setLists = {};
-          setLists.data = [];
+        // If 401 then logout
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          // If failure get from local storage
+          var setLists = angular.fromJson(localStorage['setLists']);
+          if (setLists === undefined) { 
+            setLists = {};
+            setLists.data = [];
+          }
+          callback(setLists);
         }
-        callback(setLists);
       });
     }
 
@@ -50,13 +59,17 @@
         callback(setList);
         saveSetList(setList, false);
       }, function (response) {
-        // If failure get from local storage
-        var setList = angular.fromJson(localStorage['setList_' + setListID]);
-        if (setList === undefined) { 
-          setList = {};
-          setList.data = [];
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          // If failure get from local storage
+          var setList = angular.fromJson(localStorage['setList_' + setListID]);
+          if (setList === undefined) { 
+            setList = {};
+            setList.data = [];
+          }
+          callback(setList);
         }
-        callback(setList);
       });
     }
 
@@ -73,8 +86,12 @@
       SetListResource.update({ setListID: setList.data._id }, setList.data, function (data) {
         saveSetList(setList, false);
         console.log(data);
-      }, function (data) {
-        console.log(data);
+      }, function (response) {
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          console.log(response);
+        }
       });
     }
 
@@ -95,8 +112,12 @@
         dirtyLaundry.splice(dirtyLaundry.indexOf(setListID), 1);
         localStorage['dirtyLaundry'] = angular.toJson(dirtyLaundry);
         console.log(data);
-      }, function (data) {
-        console.log(data);
+      }, function (response) {
+        if (response.status === 401) {
+          $rootScope.$broadcast('authorize', { 'authorized': false });
+        } else {
+          console.log(response);
+        }
       });
     }
 

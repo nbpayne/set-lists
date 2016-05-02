@@ -21,11 +21,16 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.14.0')
+    .constant('VERSION', '0.15.0')
     .config(config)
     .run(run);
 
-  function config ($stateProvider, $urlRouterProvider, $facebookProvider, FB_APPID) {
+  function config (
+    $stateProvider, 
+    $urlRouterProvider, 
+    $facebookProvider, 
+    FB_APPID
+  ) {
     // Routing
     $stateProvider
     .state('login', {
@@ -69,7 +74,13 @@
 
   }
 
-  function run ($rootScope, UserService, $state, $facebook, $window) {
+  function run (
+    $rootScope, 
+    UserService, 
+    $state, 
+    $facebook, 
+    $window
+  ) {
     // Enforce security
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
       // Get rid of any querystring (esp. after redirect from facebook login)
@@ -88,12 +99,19 @@
       }
     });
 
+    // Handle authentication state changes
     $rootScope.$on('authenticate', function (event, response) {
       if(!response.authenticated) {
         $state.transitionTo('login');
       } else {
         $state.transitionTo('set-lists');
       }
+    });
+
+    // Listen for authorization
+    $rootScope.$on('authorize', function (event, response) {
+      //console.log(response);
+      UserService.logout();
     });
 
   }
