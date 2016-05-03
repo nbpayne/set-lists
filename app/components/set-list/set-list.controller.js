@@ -15,7 +15,6 @@
 
   SetList.$inject = [
     '$location', 
-    // '$log', 
     '$uibModal', 
     '$scope', 
     '$stateParams', 
@@ -28,8 +27,7 @@
   ];
 
   function SetList (
-    $location, 
-    // $log, 
+    $location,  
     $uibModal, 
     $scope, 
     $stateParams, 
@@ -149,7 +147,7 @@
         vm.setList.data.venue = tmpSetList.venue;
         SetListService.saveSetList(vm.setList);
       }, function (reason) {
-        console.log(reason);
+        //console.log(reason);
       });
     }
 

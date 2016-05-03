@@ -17,20 +17,34 @@
       'ngDraggable',
       'ngResource', 
       'SetListApp.config', 
+      'tandibar/ng-rollbar', 
       'ui.bootstrap', 
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.18.0')
+    .constant('VERSION', '0.19.0')
     .config(config)
     .run(run);
 
   function config (
+    $facebookProvider,
     $stateProvider, 
     $urlRouterProvider, 
-    $facebookProvider, 
-    FB_APPID
+    ENV, 
+    FB_APPID, 
+    ROLLBAR_ID, 
+    RollbarProvider
   ) {
+    // Configure Rollbar for error logging
+    RollbarProvider.init({
+      accessToken: ROLLBAR_ID,
+      verbose: (ENV === 'development'), 
+      captureUncaught: true,
+      payload: {
+        environment: ENV
+      }
+    });
+
     // Routing
     $stateProvider
     .state('login', {
@@ -75,12 +89,26 @@
   }
 
   function run (
-    $rootScope, 
-    UserService, 
-    $state, 
-    $facebook, 
-    $window
+    $facebook,
+    $rootScope,  
+    $state,  
+    $window, 
+    Rollbar, 
+    UserService
   ) {
+    // Get user
+    var user = UserService.user();
+    // Add user information to Rollbar logging
+    if (user) {
+      Rollbar.configure({
+        payload: {
+          person: {
+            id: user.id
+          }
+        }
+      });
+    }
+    
     // Enforce security
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
       // Get rid of any querystring (esp. after redirect from facebook login)
@@ -92,7 +120,7 @@
         }
       } else {
         // Secure pages
-        if(toState.secure && !UserService.user().isLoggedIn) {
+        if(toState.secure && !user.isLoggedIn) {
           $state.transitionTo('login');
           event.preventDefault();
         }
@@ -102,6 +130,14 @@
     // Handle authentication state changes
     $rootScope.$on('authenticate', function (event, response) {
       if(!response.authenticated) {
+        // Add user information to Rollbar logging
+        Rollbar.configure({
+          payload: {
+            person: {
+              id: user.id
+            }
+          }
+        });
         $state.transitionTo('login');
       } else {
         $state.transitionTo('set-lists');
@@ -110,7 +146,6 @@
 
     // Listen for authorization
     $rootScope.$on('authorize', function (event, response) {
-      //console.log(response);
       UserService.logout();
     });
 

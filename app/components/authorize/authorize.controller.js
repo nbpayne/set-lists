@@ -6,16 +6,18 @@
     .controller('Authorize', Authorize);
 
   Authorize.$inject = [
-    'UserService', 
     '$facebook', 
-    'FB_APPID'
+    'FB_APPID',
+    'UserService', 
+    'Rollbar'
   ];
 
 	// Authorize controller
   function Authorize (
-    UserService, 
     $facebook, 
-    FB_APPID
+    FB_APPID,
+    UserService, 
+    Rollbar
   ) {
     var vm = this;
     
@@ -33,7 +35,7 @@
           }
         },
         function (response) {
-          console.log(response);
+          Rollbar.error('$facebook.getLoginStatus failed to return a response', response);
         }
       );
     }

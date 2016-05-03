@@ -46,7 +46,6 @@
         /* jshint -W117, -W030 */
         getJSONFixture('authorization/authorization-response.mock.json'), 
         function () {
-          //console.log('Yata!');
           return;
         }
       );
@@ -65,7 +64,6 @@
         /* jshint -W117, -W030 */
         getJSONFixture('authorization/authorization-response.mock.json'), 
         function () {
-          //console.log('Yata!');
           return;
         }
       );

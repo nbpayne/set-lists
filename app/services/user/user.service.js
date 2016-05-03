@@ -6,13 +6,18 @@
   .service('UserService', UserService);
 
   UserService.$inject = [
-    'AuthorizationResource', 
     '$http', 
-    '$rootScope'
+    '$rootScope',
+    'AuthorizationResource', 
+    'Rollbar'
   ];
 
-  function UserService (AuthorizationResource, $http, $rootScope) {
-    
+  function UserService (
+    $http, 
+    $rootScope, 
+    AuthorizationResource, 
+    Rollbar
+  ) {
     return {
       user: user,
       login: login, 
@@ -25,6 +30,7 @@
         $http.defaults.headers.common['auth-token'] = authorization.authToken;
         return { 
           isLoggedIn: true, 
+          id: authorization._id, 
           name: authorization.firstName + ' ' + authorization.lastName,
           band: authorization.band,
           songListID: authorization.songListID
@@ -32,6 +38,7 @@
       } else {
         return {
           isLoggedIn: false,
+          id: undefined, 
           name: undefined,
           band: undefined,
           songListID: undefined
@@ -45,7 +52,7 @@
         localStorage['authorization'] = angular.toJson(data);
         $rootScope.$broadcast('authenticate', { 'authenticated': true });
       }, function (response) {
-        console.log(response);
+        Rollbar.error('login failed to get the authorization from the server', response);
       });
     }
 
@@ -58,7 +65,6 @@
       localStorage.removeItem('authorization');
       
       //AuthorizationResource.delete({ accessToken: authorization.authToken }, function (data) {
-        //console.log('Authorization deleted from server');
         delete $http.defaults.headers.common['auth-token'];
         $rootScope.$broadcast('authenticate', { 'authenticated': false });
       //}, function (response) {

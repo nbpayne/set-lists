@@ -23,6 +23,7 @@
     };
 
     function startSetListSynchroniser () {
+      console.log('Set list synchroniser started');
       synchroniser = $interval(function () {
         // Only run if we have a setListID
         if ($stateParams.setListID) {
@@ -48,10 +49,12 @@
     }
 
     function stopSetListSynchroniser () {
+      console.log('Set list synchroniser stopped');
       $interval.cancel(synchroniser);
     }
 
     function startSetListsSynchroniser () {
+      console.log('Set lists synchroniser started');
       synchroniser = $interval(function () {
         // Get dirty laundry from local storage
         var dirtyLaundry = angular.fromJson(localStorage['dirtyLaundry']);
@@ -64,6 +67,7 @@
     }
 
     function stopSetListsSynchroniser () {
+      console.log('Set lists synchroniser stopped');
       $interval.cancel(synchroniser);
     }
   }

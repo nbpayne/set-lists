@@ -13,8 +13,7 @@
     .module('SetListApp')
     .controller('SetLists', SetLists);
 
-  SetLists.$inject = [
-    '$log', 
+  SetLists.$inject = [ 
     '$uibModal',
     '$scope', 
     '$state',  
@@ -26,7 +25,7 @@
     'UserService'];
 
   function SetLists (
-    $log, 
+  
     $uibModal,
     $scope, 
     $state, 
@@ -81,7 +80,7 @@
       modalInstance.result.then(reallyCreateSetList, cancel);
 
       function cancel (reason) {
-        //$log.info(reason);
+        //console.log(reason);
       }
       
     }

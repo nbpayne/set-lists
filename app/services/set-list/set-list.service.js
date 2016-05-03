@@ -7,11 +7,13 @@
 
   SetListService.$inject = [
     '$rootScope', 
+    'Rollbar', 
     'SetListResource'
   ];
 
   function SetListService (
     $rootScope, 
+    Rollbar, 
     SetListResource
   ) {
     return {
@@ -25,6 +27,7 @@
     };
 
     function getSetLists (callback) {
+      console.log('Get set lists from the server');
       SetListResource.query({ }, function(data) {
         var setLists = {};
         setLists.data = data;
@@ -42,6 +45,7 @@
             setLists.data = [];
           }
           callback(setLists);
+          Rollbar.error('getSetLists failed to get set lists -- set lists gotten from localStorage', response);
         }
       });
     }
@@ -53,6 +57,7 @@
     }
 
     function getSetList (setListID, callback) {
+      console.log('Get set list from the server');
       SetListResource.get({ setListID: setListID }, function(data) {
         var setList = {};
         setList.data = data;
@@ -69,12 +74,14 @@
             setList.data = [];
           }
           callback(setList);
+          Rollbar.error('getSetList failed to get set list -- set lists gotten from localStorage', response);
         }
       });
     }
 
     function saveSetList (setList, dirty) {
       // Save to local storage
+      console.log('Save set list to localStorage');
       if (dirty === undefined) { dirty = true; }
       setList.isDirty = dirty;
       localStorage['setList_' + setList.data._id] = angular.toJson(setList);
@@ -85,19 +92,18 @@
       console.log('Save set list to server!');
       SetListResource.update({ setListID: setList.data._id }, setList.data, function (data) {
         saveSetList(setList, false);
-        console.log(data);
       }, function (response) {
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          console.log(response);
+          Rollbar.error('saveSetListToServer failed to save the set list to the server', response);
         }
       });
     }
 
     function deleteSetList (setListID) {
       // Save to laundry list in local storage
-      //console.log('Save set list to dirty laundry list in local storage');
+      console.log('Save set list to dirty laundry list in local storage');
       var dirtyLaundry = angular.fromJson(localStorage['dirtyLaundry']);
       if (dirtyLaundry === undefined) { dirtyLaundry = []; }
       dirtyLaundry.push(setListID);
@@ -111,12 +117,11 @@
         var dirtyLaundry = angular.fromJson(localStorage['dirtyLaundry']);
         dirtyLaundry.splice(dirtyLaundry.indexOf(setListID), 1);
         localStorage['dirtyLaundry'] = angular.toJson(dirtyLaundry);
-        console.log(data);
       }, function (response) {
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          console.log(response);
+          Rollbar.error('deleteSetListFromServer failed to delete the set list from the server', response);
         }
       });
     }

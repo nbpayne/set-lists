@@ -5,19 +5,21 @@
     .module('SetListApp')
     .controller('Login', Login);
 
-  Login.$inject = [ 
-    'UserService',  
-    '$window', 
+  Login.$inject = [
     '$facebook', 
-    'FB_APPID'
+    '$window', 
+    'FB_APPID',
+    'Rollbar', 
+    'UserService'
   ];
 
 	// Login controller
   function Login (
-    UserService, 
-    $window, 
     $facebook, 
-    FB_APPID
+    $window, 
+    FB_APPID,
+    Rollbar, 
+    UserService
   ) {
     var vm = this;
     vm.loading = false;
@@ -36,7 +38,7 @@
           }
         },
         function (response) {
-          console.log(response);
+          Rollbar.error('$facebook.getLoginStatus failed to return a response', response);
           vm.loading = false;
         }
       );

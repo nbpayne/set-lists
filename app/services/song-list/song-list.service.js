@@ -7,11 +7,13 @@
 
   SongListService.$inject = [
     '$rootScope', 
+    'Rollbar', 
     'SongListResource'
   ];
 
   function SongListService (
     $rootScope, 
+    Rollbar, 
     SongListResource
   ) {
     return {
@@ -21,6 +23,7 @@
     };
 
     function getSongList (songListID, callback) {
+      console.log('Get song list from the server');
       SongListResource.get({ songListID: songListID }, function(data) {
         var songList = {};
         songList.data = data;
@@ -37,12 +40,14 @@
             songList.data = [];
           }
           callback(songList);
+          Rollbar.error('getSongList failed to get the song list -- song list gotten from localStorage');
         }
       });
     }
 
     function saveSongList (songList, dirty) {
       // Save to local storage
+      console.log('Save song list to local storage');
       if (dirty === undefined) { dirty = true; }
       songList.isDirty = dirty;
       localStorage['songList_' + songList.data._id] = angular.toJson(songList);
@@ -53,12 +58,11 @@
       console.log('Save song list to server!');
       SongListResource.update({ songListID: songList.data._id }, songList.data, function (data) {
         saveSongList(songList, false);
-        console.log(data);
       }, function (response) {
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          console.log(response);
+          Rollbar.error('saveSongListToServer failed to save the song list to the server', response);
         }
       });
     }
