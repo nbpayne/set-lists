@@ -22,7 +22,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.19.2')
+    .constant('VERSION', '0.20.0')
     .config(config)
     .run(run);
 
@@ -59,6 +59,11 @@
       templateUrl: 'components/authorize/authorize.html', 
       controller: 'Authorize', 
       controllerAs: 'vm', 
+      secure: false
+    })
+    .state('release-notes', {
+      url: '/release-notes', 
+      templateUrl: 'components/release-notes/release-notes.html', 
       secure: false
     })
     .state('set-lists', {
