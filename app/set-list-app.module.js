@@ -22,7 +22,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.19.1')
+    .constant('VERSION', '0.19.2')
     .config(config)
     .run(run);
 
@@ -130,6 +130,11 @@
     // Handle authentication state changes
     $rootScope.$on('authenticate', function (event, response) {
       if(!response.authenticated) {
+        $state.transitionTo('login');
+      } else {
+        // Update user object
+        user = UserService.user();
+
         // Add user information to Rollbar logging
         Rollbar.configure({
           payload: {
@@ -138,8 +143,6 @@
             }
           }
         });
-        $state.transitionTo('login');
-      } else {
         $state.transitionTo('set-lists');
       }
     });
