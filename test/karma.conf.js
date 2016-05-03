@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/angular-momentjs/angular-momentjs.js',
       'bower_components/ngFacebook/dev/src/unmin/ngFacebook.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/ng-rollbar/ng-rollbar.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jasmine/lib/jasmine-core/jasmine.js',
       'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
