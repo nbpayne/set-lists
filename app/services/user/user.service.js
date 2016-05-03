@@ -52,7 +52,7 @@
         localStorage['authorization'] = angular.toJson(data);
         $rootScope.$broadcast('authenticate', { 'authenticated': true });
       }, function (response) {
-        Rollbar.error('login failed to get the authorization from the server', response);
+        Rollbar.warning('login failed to get the authorization from the server', response);
       });
     }
 

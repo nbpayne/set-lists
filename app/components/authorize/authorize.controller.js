@@ -7,6 +7,7 @@
 
   Authorize.$inject = [
     '$facebook', 
+    '$state', 
     'FB_APPID',
     'UserService', 
     'Rollbar'
@@ -15,6 +16,7 @@
 	// Authorize controller
   function Authorize (
     $facebook, 
+    $state, 
     FB_APPID,
     UserService, 
     Rollbar
@@ -35,7 +37,8 @@
           }
         },
         function (response) {
-          Rollbar.error('$facebook.getLoginStatus failed to return a response', response);
+          Rollbar.warning('$facebook.getLoginStatus failed to return a response', response);
+          $state.transitionTo('login');
         }
       );
     }

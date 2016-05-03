@@ -40,7 +40,7 @@
             songList.data = [];
           }
           callback(songList);
-          Rollbar.error('getSongList failed to get the song list -- song list gotten from localStorage');
+          Rollbar.warning('getSongList failed to get the song list -- song list gotten from localStorage');
         }
       });
     }
@@ -62,7 +62,7 @@
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          Rollbar.error('saveSongListToServer failed to save the song list to the server', response);
+          Rollbar.warning('saveSongListToServer failed to save the song list to the server', response);
         }
       });
     }

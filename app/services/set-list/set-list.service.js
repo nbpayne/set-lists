@@ -45,7 +45,7 @@
             setLists.data = [];
           }
           callback(setLists);
-          Rollbar.error('getSetLists failed to get set lists -- set lists gotten from localStorage', response);
+          Rollbar.warning('getSetLists failed to get set lists -- set lists gotten from localStorage', response);
         }
       });
     }
@@ -74,7 +74,7 @@
             setList.data = [];
           }
           callback(setList);
-          Rollbar.error('getSetList failed to get set list -- set lists gotten from localStorage', response);
+          Rollbar.warning('getSetList failed to get set list -- set lists gotten from localStorage', response);
         }
       });
     }
@@ -96,7 +96,7 @@
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          Rollbar.error('saveSetListToServer failed to save the set list to the server', response);
+          Rollbar.warning('saveSetListToServer failed to save the set list to the server', response);
         }
       });
     }
@@ -121,7 +121,7 @@
         if (response.status === 401) {
           $rootScope.$broadcast('authorize', { 'authorized': false });
         } else {
-          Rollbar.error('deleteSetListFromServer failed to delete the set list from the server', response);
+          Rollbar.warning('deleteSetListFromServer failed to delete the set list from the server', response);
         }
       });
     }

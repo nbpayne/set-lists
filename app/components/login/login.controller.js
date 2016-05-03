@@ -38,7 +38,7 @@
           }
         },
         function (response) {
-          Rollbar.error('$facebook.getLoginStatus failed to return a response', response);
+          Rollbar.warning('$facebook.getLoginStatus failed to return a response', response);
           vm.loading = false;
         }
       );
