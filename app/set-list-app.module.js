@@ -22,7 +22,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.21.2')
+    .constant('VERSION', '0.21.0')
     .config(config)
     .run(run);
 
