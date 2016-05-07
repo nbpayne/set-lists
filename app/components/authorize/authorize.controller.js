@@ -27,6 +27,7 @@
 
     // Authorize the user
     function authorize () {
+      Rollbar.info('New user authorized');
       $facebook.getLoginStatus().then(
         function (response) {
           if (response.status === 'connected') {

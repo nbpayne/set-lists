@@ -20,6 +20,14 @@ h1:first-of-type {
   cursor: move;
 }
 
+dd {
+  margin-bottom: 1em;
+}
+
+ol {
+  padding-left: 2em;
+}
+
 // Layout
 
 
@@ -40,6 +48,10 @@ h1:first-of-type {
 
 .navbar-brand {
   padding-right: 0.25em;
+}
+
+.pull-right {
+  margin-left: 0.5em;
 }
 
 .sets {

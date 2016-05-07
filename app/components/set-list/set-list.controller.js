@@ -120,7 +120,7 @@
 
     // Add song to set list
     function addSong (i) {
-      vm.setList.data.songs.push(vm.songList.data.songs[i]);
+      vm.setList.data.songs.push(orderByFilter(vm.songList.data.songs, 'name')[i]);
       SetListService.saveSetList(vm.setList);
     }
 
