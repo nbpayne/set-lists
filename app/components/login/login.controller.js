@@ -34,6 +34,7 @@
           }
           else {
             $window.location.href = 'https://www.facebook.com/dialog/oauth?client_id=' + FB_APPID + 
+              '&scope=public_profile,email' +
               '&redirect_uri=' + $window.location.origin + $window.location.pathname;
           }
         },
