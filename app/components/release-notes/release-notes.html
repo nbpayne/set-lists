@@ -9,6 +9,10 @@
                 Release Notes
               </h1>
               <dl>
+                <dt>0.22.0 IMPROVEMENT Gigs today that have already started still appear in the `Upcoming Gigs` 
+                list</dt>
+                <dd>If you looked at your gig one minute after it started it was appearing in the `Past Gigs` list. Now
+                it won't move there until tomorrow.</dd>
                 <dt>0.21.2 BUGFIX Clicking '+' to add song adds wrong song</dt>
                 <dd>Crazy JavaScript thing where songs weren't in alphabetical order under the hood.</dd>
                 <dt>0.21.1 BUGFIX Fix small error in HTML</dt>
@@ -38,8 +42,8 @@
                 <dd>If the server says you're not authorized, then the app now logs you out so you can log back in 
                 again and be authorised. Previously it was ignoring this and you could change stuff without it being
                 saved to the server.</dd>
-                <dt>0.14.0 FEATURE Add spinners to show progress whilst loading from API / Make font-size bigger in `
-                set-lists` view</dt>
+                <dt>0.14.0 FEATURE Add spinners to show progress whilst loading from API / Make font-size bigger in 
+                `set-lists` view</dt>
                 <dd>The server responds fast &mdash; I mean, in like 500ms &mdash; but this short wait can still give
                 the impression that something is not working. The app now shows spinners whilst it connects to the 
                 server so that you know it's doing something.</dd>

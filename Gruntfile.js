@@ -29,6 +29,7 @@ module.exports = function (grunt) {
         files: [
           'app/set-list-app.module.js', 
           'app/components/**/*.controller.js', 
+          'app/components/**/*.filter.js', 
           'app/services/**/*.mock.js', 
           'app/services/**/*.resource.js', 
           'app/services/**/*.service.js'
@@ -157,6 +158,7 @@ module.exports = function (grunt) {
           'Gruntfile.js',
           'app/set-list-app.module.js', 
           'app/components/**/*.controller.js', 
+          'app/components/**/*.filter.js', 
           'app/services/**/*.mock.js', 
           'app/services/**/*.resource.js', 
           'app/services/**/*.service.js'
