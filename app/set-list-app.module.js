@@ -14,6 +14,7 @@
     .module('SetListApp', [
       'angular-momentjs',
       'facebook', 
+      'ngclipboard', 
       'ngDraggable',
       'ngResource', 
       'SetListApp.config', 
@@ -22,7 +23,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.22.0')
+    .constant('VERSION', '0.23.0')
     .config(config)
     .run(run);
 
@@ -79,6 +80,13 @@
       controller: 'SetList', 
       controllerAs: 'vm',
       secure: true
+    })
+    .state('share', {
+      url: '/share/:shareID', 
+      templateUrl: 'components/share/share.html', 
+      controller: 'Share', 
+      controllerAs: 'vm', 
+      secure: false
     });
 
     $urlRouterProvider.otherwise('/set-lists');

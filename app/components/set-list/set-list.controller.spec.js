@@ -86,6 +86,13 @@
       expect(vm.setList.data.songs[0]._id).toBe('1');
     });
 
+    // Share set-list
+    it('should share a set list', function () {
+      $httpBackend.flush();
+      vm.shareSetList();
+      expect(vm.setList.data.share).toBe('test-1');
+    })
+
   });
 
 })();

@@ -14,7 +14,6 @@
     .controller('SetList', SetList);
 
   SetList.$inject = [
-    '$location', 
     '$uibModal', 
     '$scope', 
     '$stateParams', 
@@ -27,7 +26,6 @@
   ];
 
   function SetList (
-    $location,  
     $uibModal, 
     $scope, 
     $stateParams, 
@@ -39,7 +37,6 @@
     SynchronisationService
   ) {
     var vm = this;
-    vm.location = $location.absUrl();
     vm.loading = true;
 
     vm.addNewSong = addNewSong;
@@ -50,6 +47,7 @@
     vm.onDropComplete = onDropComplete;
     vm.removeSong = removeSong;
     vm.saveSong = saveSong;
+    vm.shareSetList = shareSetList;
 
     init();
 
@@ -82,6 +80,7 @@
         vm.setList.data._id = setList.data._id;
         vm.setList.data.date = setList.data.date;
         vm.setList.data.venue = setList.data.venue;
+        vm.setList.data.share = setList.data.share;
         vm.setList.data.songListID = setList.data.songListID;
         vm.setList.data.songs = [];
 
@@ -188,6 +187,31 @@
       vm.songList.data.songs[index].edit = false;
       SongListService.saveSongList(vm.songList);
       SetListService.saveSetList(vm.setList);
+    }
+
+    // Share a set list
+    function shareSetList () {
+      // Is there a share ID already?
+      if (!vm.setList.data.share) {
+        // Generate one
+        vm.setList.data.share = ObjectIdService.getObjectId();
+
+        // Save the set list
+        SetListService.saveSetList(vm.setList);
+      }
+
+      // Open a modal with the link
+      var modalInstance = $uibModal.open({
+        templateUrl: 'components/share-modal/share-modal.html', 
+        controller: 'ShareModal', 
+        controllerAs: 'vm', 
+        resolve: {
+          share: function () {
+            return vm.setList.data.share;
+          }
+        }
+      });
+
     }
 
   }

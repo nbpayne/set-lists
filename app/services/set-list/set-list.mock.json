@@ -2,6 +2,7 @@
   "_id": "test-1",
   "date": "2013-12-11T20:30:00", 
   "venue": "The Newsagency", 
+  "share": "test-1", 
   "songListID": "test-1", 
   "songs": [
     {

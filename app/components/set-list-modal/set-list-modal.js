@@ -10,8 +10,8 @@
  */
 
   angular
-      .module('SetListApp')
-      .controller('SetListModal', SetListModal);
+  .module('SetListApp')
+  .controller('SetListModal', SetListModal);
 
   SetListModal.$inject = [
     '$uibModalInstance', 
