@@ -23,7 +23,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.23.0')
+    .constant('VERSION', '0.23.1')
     .config(config)
     .run(run);
 
@@ -126,7 +126,7 @@
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
       // Get rid of any querystring (esp. after redirect from facebook login)
       if ($window.location.search) {
-        if ($window.location.search.includes('?code=')) {
+        if ($window.location.search.indexOf('?code=') !== -1) {
           $window.location.href = $window.location.origin + $window.location.pathname + '#/authorize';
         } else {
           $window.location.href = $window.location.origin + $window.location.pathname + '#/set-lists'; 
