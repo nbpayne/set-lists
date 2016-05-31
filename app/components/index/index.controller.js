@@ -14,18 +14,50 @@
     .controller('Index', Index);
 
   Index.$inject = [
-    '$scope', 
+    '$state', 
+    'Rollbar', 
+    'uiTourService', 
     'UserService',
     'VERSION'
   ];
 
-  function Index($scope, UserService, VERSION) {
+  function Index($state, Rollbar, uiTourService, UserService, VERSION) {
     var vm = this;
     vm.logout = logout;
+    vm.startTour = startTour;
     vm.version = VERSION;
 
     function logout () {
       UserService.logout(function() { return; });
+    }
+
+    function startTour() {
+      Rollbar.info('User manually started the tour');
+      var tour = uiTourService.getTour();
+      if (tour) {
+        var step = tour.getCurrentStep();
+        if (!step) {
+          tour.start();
+        } else {
+          var state = $state.current.name;
+          if (state === 'set-lists') {
+            if (step.order <= 4) {
+              tour.resume();
+            } else {
+              tour.start();
+            }
+          } else if (state === 'set-list') {
+            if (step.order >= 5) {
+              tour.resume();
+            } else {
+              tour.start();
+            }
+          } else {
+            tour.start();
+          } 
+        }
+      }
+
     }
     
   }

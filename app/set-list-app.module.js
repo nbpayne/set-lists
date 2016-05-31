@@ -13,6 +13,7 @@
   angular
     .module('SetListApp', [
       'angular-momentjs',
+      'bm.uiTour', 
       'facebook', 
       'ngclipboard', 
       'ngDraggable',
@@ -23,7 +24,7 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.23.1')
+    .constant('VERSION', '0.24.0')
     .config(config)
     .run(run);
 

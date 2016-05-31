@@ -22,6 +22,7 @@
     'orderByFilter', 
     'SetListService', 
     'SynchronisationService', 
+    'uiTourService', 
     'UserService'];
 
   function SetLists (
@@ -34,6 +35,7 @@
     orderByFilter, 
     SetListService, 
     SynchronisationService, 
+    uiTourService, 
     UserService
   ) {
     var vm = this;
@@ -56,7 +58,13 @@
       SetListService.getSetLists(initialize);
 
       // Start synchroniser
-      SynchronisationService.startSetListsSynchroniser(); 
+      SynchronisationService.startSetListsSynchroniser();
+
+      // Kick off tour
+      if (!UserService.user().toured) { 
+        var tour = uiTourService.getTour();
+        if (tour) { tour.start(); }
+      }
     }
 
     function initialize (setLists) {

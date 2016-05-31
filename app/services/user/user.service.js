@@ -21,7 +21,8 @@
     return {
       user: user,
       login: login, 
-      logout: logout
+      logout: logout, 
+      finishTour: finishTour
     };
 
     function user () {
@@ -33,7 +34,8 @@
           id: authorization._id, 
           name: authorization.firstName + ' ' + authorization.lastName,
           band: authorization.band,
-          songListID: authorization.songListID
+          songListID: authorization.songListID, 
+          toured: authorization.toured
         };
       } else {
         return {
@@ -41,7 +43,8 @@
           id: undefined, 
           name: undefined,
           band: undefined,
-          songListID: undefined
+          songListID: undefined, 
+          toured: false
         };
       }
     }
@@ -72,6 +75,13 @@
       //  delete $http.defaults.headers.common['auth-token'];
       //  $rootScope.$broadcast('authenticate', { 'authenticated': false });
       //});
+    }
+
+    function finishTour() {
+      var user = angular.fromJson(localStorage['authorization']);
+      user.toured = true;
+      localStorage['authorization'] = angular.toJson(user);
+      Rollbar.info('Tour finished');
     }
 
   }

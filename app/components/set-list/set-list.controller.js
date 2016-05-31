@@ -22,7 +22,9 @@
     'orderByFilter', 
     'SetListService', 
     'SongListService', 
-    'SynchronisationService'
+    'SynchronisationService', 
+    'uiTourService', 
+    'UserService'
   ];
 
   function SetList (
@@ -34,7 +36,9 @@
     orderByFilter, 
     SetListService, 
     SongListService, 
-    SynchronisationService
+    SynchronisationService, 
+    uiTourService, 
+    UserService
   ) {
     var vm = this;
     vm.loading = true;
@@ -48,6 +52,7 @@
     vm.removeSong = removeSong;
     vm.saveSong = saveSong;
     vm.shareSetList = shareSetList;
+    vm.finishTour = finishTour;
 
     init();
 
@@ -63,6 +68,12 @@
         // Make sure that the interval is destroyed too
         SynchronisationService.stopSetListSynchroniser();
       });
+
+      // Kick off tour
+      if (!UserService.user().toured) {
+        var tour = uiTourService.getTour();
+        if (tour) { tour.startAt(1); }
+      }
     }
 
     // Initialize the data for the view
@@ -212,6 +223,11 @@
         }
       });
 
+    }
+
+    // Update the user to not display the tour again
+    function finishTour() {
+      UserService.finishTour();
     }
 
   }

@@ -15,6 +15,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Serve static files
+  var serveStatic = require('serve-static');
+
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -83,20 +86,20 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
+              serveStatic('.tmp'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
               connect().use(
                 '/app/styles',
-                connect.static('./app/styles')
+                serveStatic('./app/styles')
               ),
               connect().use(
                 '/fonts',
-                connect.static('./bower_components/font-awesome/fonts')
+                serveStatic('./bower_components/font-awesome/fonts')
               ),
-              connect.static('app')
+              serveStatic('app')
             ];
           }
         }
@@ -108,17 +111,17 @@ module.exports = function (grunt) {
             return [
               connect().use(
                 '/app/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
               connect().use(
                 '/app/styles',
-                connect.static('./.tmp/styles')
+                serveStatic('./.tmp/styles')
               ),
               connect().use(
                 '/app/fonts',
-                connect.static('./bower_components/font-awesome/fonts')
+                serveStatic('./bower_components/font-awesome/fonts')
               ),
-              connect.static('./')
+              serveStatic('./')
             ];
           }
         }
@@ -128,13 +131,13 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect.static('test'),
+              serveStatic('.tmp'),
+              serveStatic('test'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
-              connect.static('app')
+              serveStatic('app')
             ];
           }
         }

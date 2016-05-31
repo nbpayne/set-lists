@@ -50,6 +50,16 @@ ol {
   padding-right: 0.25em;
 }
 
+.popover {
+  width: 272px;
+  color: #000;
+}
+
+.popover .modal-body, 
+.popover .modal-header {
+  font-size: 1em;
+}
+
 .pull-right {
   margin-left: 0.5em;
 }
