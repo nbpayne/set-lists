@@ -63,7 +63,9 @@
       // Kick off tour
       if (!UserService.user().toured) { 
         var tour = uiTourService.getTour();
-        if (tour) { tour.start(); }
+        if (tour) { 
+          tour.start(); 
+        }
       }
     }
 

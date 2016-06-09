@@ -81,7 +81,7 @@
       var user = angular.fromJson(localStorage['authorization']);
       user.toured = true;
       localStorage['authorization'] = angular.toJson(user);
-      Rollbar.info('Tour finished');
+      //Rollbar.info('Tour finished');
     }
 
   }

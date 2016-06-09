@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="SetListApp" ng-controller="Index as vm" ui-tour ui-tour-placement="bottom">
+  <body ng-app="SetListApp" ng-controller="Index as vm" 
+    ui-tour ui-tour-placement="bottom" ui-tour-on-pause="vm.finishTour()">
 
     <div class="header">
 
@@ -72,7 +73,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <script src="bower_components/angular/angular.js"></script>
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>

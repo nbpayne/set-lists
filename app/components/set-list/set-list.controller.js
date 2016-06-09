@@ -52,7 +52,6 @@
     vm.removeSong = removeSong;
     vm.saveSong = saveSong;
     vm.shareSetList = shareSetList;
-    vm.finishTour = finishTour;
 
     init();
 
@@ -222,12 +221,7 @@
           }
         }
       });
-
-    }
-
-    // Update the user to not display the tour again
-    function finishTour() {
-      UserService.finishTour();
+      
     }
 
   }

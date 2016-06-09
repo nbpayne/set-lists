@@ -23,6 +23,7 @@
 
   function Index($state, Rollbar, uiTourService, UserService, VERSION) {
     var vm = this;
+    vm.finishTour = finishTour;
     vm.logout = logout;
     vm.startTour = startTour;
     vm.version = VERSION;
@@ -32,9 +33,11 @@
     }
 
     function startTour() {
-      Rollbar.info('User manually started the tour');
+      //Rollbar.info('User manually started the tour');
       var tour = uiTourService.getTour();
       if (tour) {
+        tour.start();
+        /*
         var step = tour.getCurrentStep();
         if (!step) {
           tour.start();
@@ -56,8 +59,13 @@
             tour.start();
           } 
         }
+        */
       }
+    }
 
+    function finishTour() {
+      // Update the user to not display the tour again
+      UserService.finishTour();
     }
     
   }
