@@ -25,7 +25,7 @@
       'ui.router'
     ])
     .constant('VERSION', '0.25')
-    .constant('PATCH', '0')
+    .constant('PATCH', '1')
     .config(config)
     .run(run);
 

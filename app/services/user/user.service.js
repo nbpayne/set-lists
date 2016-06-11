@@ -35,7 +35,7 @@
           name: authorization.firstName + ' ' + authorization.lastName,
           band: authorization.band,
           songListID: authorization.songListID, 
-          toured: authorization.toured
+          toured: authorization.toured || []
         };
       } else {
         return {
@@ -79,6 +79,9 @@
 
     function finishTour(state) {
       var user = angular.fromJson(localStorage['authorization']);
+      if(user.toured === undefined) {
+        user.toured = [];
+      }
       if(user.toured.indexOf(state) < 0) {
         user.toured.push(state);
         localStorage['authorization'] = angular.toJson(user);
