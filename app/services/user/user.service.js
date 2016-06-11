@@ -44,7 +44,7 @@
           name: undefined,
           band: undefined,
           songListID: undefined, 
-          toured: false
+          toured: []
         };
       }
     }
@@ -77,10 +77,12 @@
       //});
     }
 
-    function finishTour() {
+    function finishTour(state) {
       var user = angular.fromJson(localStorage['authorization']);
-      user.toured = true;
-      localStorage['authorization'] = angular.toJson(user);
+      if(user.toured.indexOf(state) < 0) {
+        user.toured.push(state);
+        localStorage['authorization'] = angular.toJson(user);
+      }
       //Rollbar.info('Tour finished');
     }
 

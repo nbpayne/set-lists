@@ -3,5 +3,6 @@
   "firstName": "Test", 
   "lastName": "User", 
   "band": "Test Band", 
-  "songListID": "test-1"
+  "songListID": "test-1", 
+  "toured": []
 }

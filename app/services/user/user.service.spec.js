@@ -41,6 +41,7 @@
       expect(UserService.user().name).toBeUndefined();
       expect(UserService.user().band).toBeUndefined();
       expect(UserService.user().songListID).toBeUndefined();
+      expect(UserService.user().toured.length).toBe(0);
       
       UserService.login(
         /* jshint -W117, -W030 */
@@ -56,6 +57,7 @@
       expect(UserService.user().name).toBe('Test User');
       expect(UserService.user().band).toBe('Test Band');
       expect(UserService.user().songListID).toBe('test-1');
+      expect(UserService.user().toured.length).toBe(0);
     });
 
     it('should log a user off', function () {
@@ -80,6 +82,25 @@
       expect(UserService.user().band).toBeUndefined();
       expect(UserService.user().songListID).toBeUndefined();
     });
+
+    it('should remember when a user closes the tour on a state', function () {
+      // Log the user on
+      $httpBackend.expectGET('http://localhost:8001/authorizations/4321');
+      UserService.login(
+        /* jshint -W117, -W030 */
+        getJSONFixture('authorization/authorization-response.mock.json'), 
+        function () {
+          return;
+        }
+      );
+      $httpBackend.flush();
+      
+      UserService.finishTour('state');
+      var authorization = angular.fromJson(localStorage['authorization']);
+
+      expect(authorization.toured).toContain('state');
+
+    })
     
   });
 

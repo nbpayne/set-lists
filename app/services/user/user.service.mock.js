@@ -10,7 +10,8 @@
                 isLoggedIn: true, 
                 name: 'Nick Payne',
                 band: 'Dear Orphans', 
-                songListID: 'test-1'   
+                songListID: 'test-1', 
+                toured: []
             };
         }, 
         login: function(callback) {

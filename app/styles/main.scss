@@ -34,8 +34,12 @@ ol {
 // Modules
 .action-icon {
   cursor: pointer;
-  font-size: 0.5em;
+  //font-size: 0.5em;
   color: $gray-light;
+}
+
+.datetimepicker {
+  width: 272px;
 }
 
 .drag-enter {
@@ -71,4 +75,8 @@ ol {
 .songs {
   font-size: 2em;
   margin-bottom: 1em;
+}
+
+.well .btn-default {
+  @include button-variant($btn-default-color, $well-bg, $well-border);
 }

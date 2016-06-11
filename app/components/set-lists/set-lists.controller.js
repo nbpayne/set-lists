@@ -61,7 +61,7 @@
       SynchronisationService.startSetListsSynchroniser();
 
       // Kick off tour
-      if (!UserService.user().toured) { 
+      if (UserService.user().toured.indexOf('set-lists') < 0) { 
         var tour = uiTourService.getTour();
         if (tour) { 
           tour.start(); 

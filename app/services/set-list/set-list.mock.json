@@ -4,6 +4,7 @@
   "venue": "The Newsagency", 
   "share": "test-1", 
   "songListID": "test-1", 
+  "toured": [], 
   "songs": [
     {
       "_id": "7"

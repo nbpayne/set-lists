@@ -69,9 +69,9 @@
       });
 
       // Kick off tour
-      if (!UserService.user().toured) {
+      if (UserService.user().toured.indexOf('set-list') < 0) {
         var tour = uiTourService.getTour();
-        if (tour) { tour.startAt(1); }
+        if (tour) { tour.start(); }
       }
     }
 

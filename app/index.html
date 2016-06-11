@@ -16,7 +16,7 @@
     <!-- endbuild -->
   </head>
   <body ng-app="SetListApp" ng-controller="Index as vm" 
-    ui-tour ui-tour-placement="bottom" ui-tour-on-pause="vm.finishTour()">
+    ui-tour ui-tour-on-pause="vm.finishTour()">
 
     <div class="header">
 
@@ -24,14 +24,13 @@
 
         <div class="container">
 
-          <div class="navbar-brand pull-right">
+          <div class="navbar-brand pull-right"tour-step="Hello"
+            tour-step-order="0"
+            tour-step-placement="bottom-right"
+            tour-step-template-url="'components/tour/0-hello.html'">
             <a href=""
               class="navbar-link" 
-              ng-click="vm.startTour()"
-              tour-step="Hello"
-              tour-step-order="0"
-              tour-step-placement="bottom-right"
-              tour-step-template-url="'components/tour/0-hello.html'"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              ng-click="vm.startTour()"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
           </div>
 
           <div class="navbar-header">
