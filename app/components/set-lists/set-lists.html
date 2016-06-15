@@ -16,7 +16,9 @@
             tour-step="CreateSetList"
             tour-step-template-url="'components/tour/4-create-set-list.html'" 
             tour-step-order="4" 
-            tour-step-placement="bottom-right"><i class="fa fa-plus action-icon" aria-hidden="true"></i></button>
+            tour-step-placement="bottom-right"><i class="fa fa-plus action-icon" aria-hidden="true"
+            analytics-on="click"
+            analytics-event="Open create setlist modal"></i></button>
         </span>
         Upcoming Gigs
       </h1>
@@ -30,8 +32,10 @@
         <dt>{{ setList.date | date:'d/MM/yyyy h:mma' }}</dt>
         <dd>
           <span class="pull-right">
-            <button class="btn btn-default"><i class="fa fa-times action-icon" aria-hidden="true" 
-            ng-click="vm.deleteSetList($index)"></i></button>
+            <button class="btn btn-default"
+              ng-click="vm.deleteSetList($index)"
+              analytics-on="click"
+              analytics-event="Delete setlist"><i class="fa fa-times action-icon" aria-hidden="true"></i></button>
           </span>
           <a ui-sref="set-list({ setListID:setList._id })">{{ setList.venue }}</a>
         </dd>

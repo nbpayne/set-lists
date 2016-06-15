@@ -13,6 +13,8 @@
   angular
     .module('SetListApp', [
       'angular-momentjs',
+      'angulartics', 
+      'angulartics.google.analytics', 
       'bm.uiTour', 
       'facebook', 
       'ngclipboard', 
@@ -24,12 +26,13 @@
       'ui.bootstrap.datetimepicker',
       'ui.router'
     ])
-    .constant('VERSION', '0.25')
-    .constant('PATCH', '2')
+    .constant('VERSION', '0.26')
+    .constant('PATCH', '0')
     .config(config)
     .run(run);
 
   function config (
+    $analyticsProvider, 
     $facebookProvider,
     $stateProvider, 
     $urlRouterProvider, 
@@ -48,6 +51,11 @@
       }
     });
 
+    // Disable GA during development
+    if(ENV === 'development') {
+      $analyticsProvider.developerMode(true);
+    }
+    
     // Routing
     $stateProvider
     .state('login', {
@@ -104,6 +112,7 @@
   }
 
   function run (
+    $analytics, 
     $facebook,
     $rootScope,  
     $state,  
@@ -123,6 +132,9 @@
         }
       });
     }
+
+    // And to GA
+    $analytics.setUsername(user.id);
     
     // Enforce security
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -158,6 +170,9 @@
             }
           }
         });
+
+        // Add user to GA
+        $analytics.setUsername(user.id);
         $state.transitionTo('set-lists');
       }
     });

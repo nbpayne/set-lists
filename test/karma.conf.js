@@ -23,7 +23,7 @@ module.exports = function(config) {
     files: [
       // bower:js
       'bower_components/angular/angular.js',
-      'bower_components/jquery/jquery.js',
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -41,6 +41,9 @@ module.exports = function(config) {
       'bower_components/ez-ng/dist/ez-ng.js',
       'bower_components/angular-hotkeys/build/hotkeys.js',
       'bower_components/angular-ui-tour/dist/angular-ui-tour.js',
+      'bower_components/SHA-1/sha1.js',
+      'bower_components/angulartics/src/angulartics.js',
+      'bower_components/angulartics-google-analytics/lib/angulartics-ga.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jasmine/lib/jasmine-core/jasmine.js',
       'bower_components/jasmine-jquery/lib/jasmine-jquery.js',

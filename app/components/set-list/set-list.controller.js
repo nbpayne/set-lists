@@ -14,6 +14,7 @@
     .controller('SetList', SetList);
 
   SetList.$inject = [
+    '$analytics', 
     '$uibModal', 
     '$scope', 
     '$stateParams', 
@@ -28,6 +29,7 @@
   ];
 
   function SetList (
+    $analytics, 
     $uibModal, 
     $scope, 
     $stateParams, 
@@ -182,6 +184,7 @@
     // Handle the drop event and pass to move a song
     function onDropComplete (i, d) {
       vm.moveSong(vm.setList.data.songs.indexOf(d), i);
+      $analytics.eventTrack('Drag and drop song');
     }
 
     // Remove song from set list

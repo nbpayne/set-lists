@@ -14,14 +14,18 @@
           tour-step="EditGig"
           tour-step-template-url="'components/tour/8-edit-gig.html'" 
           tour-step-order="8"
-          tour-step-placement="bottom-right">
+          tour-step-placement="bottom-right"
+          analytics-on="click"
+          analytics-event="Open edit setlist modal">
           <i class="fa fa-pencil action-icon" aria-hidden="true"></i>
         </button>
         <button class="btn btn-default" ng-click="vm.shareSetList()"
           tour-step="ShareSetList"
           tour-step-template-url="'components/tour/9-share-set-list.html'" 
           tour-step-order="9"
-          tour-step-placement="bottom-right">
+          tour-step-placement="bottom-right"
+          analytics-on="click"
+          analytics-event="Open share setlist modal">
           <i class="fa fa-share action-icon" aria-hidden="true"></i>
         </button>
       </span>
@@ -38,7 +42,9 @@
       <li ng-repeat="song in vm.setList.data.songs track by $index" ng-drop="true" ng-drop-success="vm.onDropComplete($index,  $data)">
         <span class="pull-right">
           <button class="btn btn-default"><i class="fa fa-times action-icon" aria-hidden="true" 
-          ng-click="vm.removeSong($index)"></i></button>
+          ng-click="vm.removeSong($index)"
+          analytics-on="click"
+          analytics-event="Remove song"></i></button>
         </span>
         <div ng-drag="true" ng-drag-data="song">
           {{ song.name }}
@@ -59,7 +65,9 @@
         <span class="sr-only">Loading...</span>
       </p>
 
-      <form ng-submit="vm.addNewSong()" ng-if="!vm.loading">
+      <form ng-submit="vm.addNewSong()" ng-if="!vm.loading"
+        analytics-on="submit"
+        analytics-event="Add song by typing">
         <div class="form-group">
           <label>Search/New</label>
           <input type="text" class="form-control" placeholder="Type song name" ng-model="vm.search" 
@@ -77,10 +85,14 @@
         tour-step-placement="bottom">
         <li ng-repeat="song in vm.songList.data.songs | filter: vm.search | orderBy: 'name'">
           <span class="pull-right" ng-hide="song.edit">
-            <button class="btn btn-default btn-sm" ng-click="vm.addSong($index)">
+            <button class="btn btn-default btn-sm" ng-click="vm.addSong($index)"
+              analytics-on="click"
+              analytics-event="Add song by button">
               <i class="fa fa-plus action-icon"></i>
             </button>
-            <button class="btn btn-default btn-sm" ng-click="vm.editSong($index)">
+            <button class="btn btn-default btn-sm" ng-click="vm.editSong($index)"
+              analytics-on="click"
+              analytics-event="Edit song">
               <i class="fa fa-pencil action-icon"></i>
             </button>
           </span>
