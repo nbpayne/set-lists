@@ -61,11 +61,9 @@
 
     function logout () {
       var authorization = angular.fromJson(localStorage['authorization']);
-      if (!authorization) {
-        return;
+      if (authorization) {
+        localStorage.removeItem('authorization');
       }
-
-      localStorage.removeItem('authorization');
       
       //AuthorizationResource.delete({ accessToken: authorization.authToken }, function (data) {
         delete $http.defaults.headers.common['auth-token'];
@@ -79,14 +77,18 @@
 
     function finishTour(state) {
       var user = angular.fromJson(localStorage['authorization']);
-      if(user.toured === undefined) {
-        user.toured = [];
+      if (user === undefined) {
+        $rootScope.$broadcast('authorize', { 'authorized': false });
+      } else {
+        if(user.toured === undefined) {
+          user.toured = [];
+        }
+        if(user.toured.indexOf(state) < 0) {
+          user.toured.push(state);
+          localStorage['authorization'] = angular.toJson(user);
+        }
+        //Rollbar.info('Tour finished');
       }
-      if(user.toured.indexOf(state) < 0) {
-        user.toured.push(state);
-        localStorage['authorization'] = angular.toJson(user);
-      }
-      //Rollbar.info('Tour finished');
     }
 
   }
