@@ -27,23 +27,27 @@
       synchroniser = $interval(function () {
         // Only run if we have a setListID
         if ($stateParams.setListID) {
-          // Check dirtiness of song list
-          var songList = angular.fromJson(
-            localStorage[
-              'songList_' + 
-              angular.fromJson(localStorage['setList_' + $stateParams.setListID]).data.songListID
-            ]
-          );
-          if (songList !== undefined && songList.isDirty) {
-            SongListService.saveSongListToServer(songList);
-          }
-
-          // Check dirtiness of set list
-          // TODO: Get set list from local storage by ID
+          // Do we have a setlist?
           var setList = angular.fromJson(localStorage['setList_' + $stateParams.setListID]);
-          if (setList !== undefined && setList.isDirty) {
-            SetListService.saveSetListToServer(setList);
-          } 
+
+          // Check dirtiness of song list
+          if (setList !== undefined) {
+            var songList = angular.fromJson(
+              localStorage[
+                'songList_' + 
+                angular.fromJson(localStorage['setList_' + $stateParams.setListID]).data.songListID
+              ]
+            );
+            if (songList !== undefined && songList.isDirty) {
+              SongListService.saveSongListToServer(songList);
+            }
+
+            // Check dirtiness of set list
+            // TODO: Get set list from local storage by ID
+            if (setList.isDirty) {
+              SetListService.saveSetListToServer(setList);
+            } 
+          }
         }
       }, 2000);
     }
