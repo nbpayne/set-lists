@@ -72,9 +72,17 @@ ol {
 	font-size: 1.5em;
 }
 
+.song {
+  text-transform: capitalize;
+}
+
 .songs {
   font-size: 2em;
   margin-bottom: 1em;
+}
+
+.venue {
+  text-transform: capitalize;
 }
 
 .well .btn-default {

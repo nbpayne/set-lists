@@ -8,7 +8,7 @@
     </p>
 
     <h1 ng-if="!vm.loading">
-      {{ vm.setList.data.venue }}
+      <span class="venue">{{ vm.setList.data.venue }}</span>
       <span class="pull-right">
         <button class="btn btn-default" ng-click="vm.editSetList()"
           tour-step="EditGig"
@@ -47,7 +47,7 @@
           analytics-event="Remove song"></i></button>
         </span>
         <div ng-drag="true" ng-drag-data="song">
-          {{ song.name }}
+          <span class="song">{{ song.name }}</span>
         </div>
       </li>
     </ol>
@@ -70,7 +70,7 @@
         analytics-event="Add song by typing">
         <div class="form-group">
           <label>Search/New</label>
-          <input type="text" class="form-control" placeholder="Type song name" ng-model="vm.search" 
+          <input type="text" class="form-control song" placeholder="Type song name" ng-model="vm.search" autofocus
             tour-step="EnterSong"
             tour-step-template-url="'components/tour/6-add-song.html'" 
             tour-step-order="6"
@@ -96,7 +96,7 @@
               <i class="fa fa-pencil action-icon"></i>
             </button>
           </span>
-          <span ng-hide="song.edit">{{ song.name }}</span> 
+          <span ng-hide="song.edit" class="song">{{ song.name }}</span> 
           <form ng-submit="vm.saveSong($index)">
             <input type="text" class="form-control" ng-model="song.name" ng-show="song.edit" />
           </form>
