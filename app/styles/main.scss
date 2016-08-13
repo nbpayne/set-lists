@@ -38,6 +38,10 @@ ol {
   color: $gray-light;
 }
 
+@media print {
+  @include responsive-invisibility('.btn');
+}
+
 .datetimepicker {
   width: 272px;
 }
