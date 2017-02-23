@@ -33,7 +33,7 @@ module.exports = function(config) {
       'bower_components/angular-momentjs/angular-momentjs.js',
       'bower_components/ngFacebook/dev/src/unmin/ngFacebook.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/ng-rollbar/ng-rollbar.min.js',
+      'bower_components/ng-rollbar/ng-rollbar.js',
       'bower_components/clipboard/dist/clipboard.js',
       'bower_components/ngclipboard/dist/ngclipboard.js',
       'bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js',
