@@ -1,6 +1,9 @@
 // Generated on 2015-08-04 using generator-angular 0.11.1
 'use strict';
 
+// Select Node Sass
+const sass = require('node-sass');
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -252,6 +255,7 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
+        implementation: sass,
         sourcemap: true, 
         includePaths: ['./bower_components']
       }, 
